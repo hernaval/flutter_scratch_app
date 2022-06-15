@@ -105,128 +105,55 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: BottomNavigationBar(
           items: _item
         ),
-        body: Center(
-          child: Stack(
-            children: [
-              Flex(direction: Axis.vertical,
-                children: [
-                  Expanded(
-                    flex: 1,
-                      child: Container(
-                        color: Colors.black,
-                      )
-                  ),
-                  Expanded(
-                    flex: 3,
-                      child: Container(
-                        color: Colors.yellow,
-                      )
-                  )
-                ],
-              ),
-              Positioned(
-                top: 50,
-                left: 20,
-                right: 20,
-                child: Container(
-                  height: 400,
-                  width: 300,
-                  color: Colors.green,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 100,
-                        width: 100,
-                        color: Colors.blue,
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+        body: PageView.builder(
+            itemBuilder: (BuildContext context, int index) =>
+              PageWidget(entry: pages[index])
+            ,
+            itemCount: pages.length,
         )
     );
   }
 }
 
-class FormPage extends StatefulWidget {
-  const FormPage({Key? key}) : super(key: key);
+class PageInfo {
+  final String title;
+  final String image;
+  final String description;
 
+  const PageInfo(this.title, this.image, this.description);
+
+}
+
+final List<PageInfo> pages= [
+  PageInfo("Introduction", "images/1.png", "This is a sample introduction images"),
+  PageInfo("Bacis", "images/2.jpg", "This is a sample thing you must know"),
+  PageInfo("Deep", "images/3.jpg", "Go deeper with this section")
+];
+
+class PageWidget extends StatefulWidget {
+  final PageInfo entry;
+  const PageWidget({Key? key, required this.entry}) : super(key: key);
   @override
-  _FormPageState createState() => _FormPageState();
+  _PageWidgetState createState() => _PageWidgetState();
 }
 
-class _FormPageState extends State<FormPage> {
-  bool isChecked = false;
-  int val = 0;
-  bool isLive= false;
-
-  void change (value) {
-    setState(() {
-      val = value;
-    });
-  }
-
-  void handleLive(value) {
-    setState(()  {
-      isLive = !isLive;
-    });
-  }
-
-  Widget CustomRadio() {
-    List <Widget> _buttonRadio = [];
-    for(int i=0; i<4; i++) {
-      _buttonRadio.add(
-        RadioListTile(value: i, groupValue: val, onChanged: change, activeColor: Colors.redAccent, title: Text("Choix $i"), )
-      );
-    }
-    return Column(
-      children: _buttonRadio,
-    );
-  }
-
-  Widget CustomCheckbox() {
-    return Column(
-      children: [
-        CheckboxListTile(
-          value: isLive,
-          onChanged: handleLive,
-          controlAffinity: ListTileControlAffinity.trailing,
-          title: const Text("Judo live"),
-          subtitle: const Text("Ippon, Waza-ari"),
-        )
-      ],
-    );
-  }
-
-  Widget CustomTextfiled() {
-    return const TextField(
-      decoration: InputDecoration(
-        labelText: "First Name",
-        hintText: "Your name please",
-        icon: Icon(Icons.supervised_user_circle),
-      ),
-      keyboardType: TextInputType.text,
-    );
-  }
+class _PageWidgetState extends State<PageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-       CustomTextfiled() ,CustomRadio(), CustomCheckbox()
-      ],
+    return Padding(padding: EdgeInsets.all(10),
+    child: ListView(
+        children: [
+          Row(
+            children: [
+              Text(widget.entry.title, style: TextStyle(color: Colors.blue, fontSize: 25))
+            ],
+          ),
+          SizedBox(height: 10),
+          Image.asset(widget.entry.image, fit: BoxFit.cover,),
+          SizedBox(height: 10),
+          Text(widget.entry.description, style: TextStyle(color: Colors.blue, fontSize: 15))
+        ],
+    ),
     );
   }
 }
-
-
-
-
