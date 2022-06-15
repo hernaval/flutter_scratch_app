@@ -29,6 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String value = "Flutter scratch app";
   List<BottomNavigationBarItem> _item = [];
+  List article = List<String>.generate(25, (index) => "Article $index");
 
 
 
@@ -104,34 +105,52 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: BottomNavigationBar(
           items: _item
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ElevatedButton(
-                onPressed: onClick,
-                child: const Text("first button")
-            ),
-            const Divider(height: 10),
-            ElevatedButton(
-                onPressed: onClickTwo,
-                child: const Text("second button")
-            ),
-            ElevatedButton(
-                onPressed: showAlert,
-                child: const Text("Alert button")
-            ),
-            const Divider(height: 10),
-            TextButton(
-                onPressed: () {},
-                child: const Text("OK BUTTON")
-            ),
-            IconButton(
-                onPressed: (){},
-                tooltip: "an icon button",
-                icon: const Icon(Icons.thumb_up, color: Colors.blue,size: 20)
-            ),
-            const FormPage(),
-          ],
+        body: Center(
+          child: Stack(
+            children: [
+              Flex(direction: Axis.vertical,
+                children: [
+                  Expanded(
+                    flex: 1,
+                      child: Container(
+                        color: Colors.black,
+                      )
+                  ),
+                  Expanded(
+                    flex: 3,
+                      child: Container(
+                        color: Colors.yellow,
+                      )
+                  )
+                ],
+              ),
+              Positioned(
+                top: 50,
+                left: 20,
+                right: 20,
+                child: Container(
+                  height: 400,
+                  width: 300,
+                  color: Colors.green,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        height: 100,
+                        width: 100,
+                        color: Colors.blue,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         )
     );
   }
