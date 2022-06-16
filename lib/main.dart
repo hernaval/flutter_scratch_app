@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scratch_app/pages/bar_item_page.dart';
+import 'package:scratch_app/pages/detail_page.dart';
 import 'package:scratch_app/pages/home_page.dart';
 import 'package:scratch_app/pages/my_page.dart';
 import 'package:scratch_app/pages/search_page.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   List pages = [
-      HomePage(),
+      DetailPage(),
       BarItemPage(),
       SearchPage(),
       MyPage()
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.black54,
           unselectedItemColor: Colors.grey.withOpacity(0.5),
           showSelectedLabels: false,
