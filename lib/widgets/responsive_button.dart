@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scratch_app/misc/colors.dart';
+import 'package:scratch_app/widgets/app_text.dart';
 
 class ResponsiveButton extends StatelessWidget {
   bool? isResponsive;
@@ -8,18 +9,20 @@ class ResponsiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: 45,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.mainColor
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("images/button-one.png")
-        ],
+    return Flexible(
+      child: Container(
+        width: width,
+        height: 45,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: AppColors.mainColor
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/button-one.png")
+          ],
+        ),
       ),
     );
   }
