@@ -14,11 +14,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green
       ),
-      home: const HomePage()
+      home: const HomePage(),
+      routes: {
+        '/home': (context) => HomePage()
+      },
     );
   }
 }
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -27,187 +29,125 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String value = "Flutter scratch app";
-  List<BottomNavigationBarItem> _item = [];
-
-
-
-  void onClick() {
-    setState(() {
-      value = "Thanks for clicking";
-    });
-  }
-
-  void onClickTwo() {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            padding: EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Bonjour les amis !")
-              ],
-            ),
-          );
-        }
-    );
-  }
-
-  Future showAlert() async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: Text("Are you bored"),
-            children: [
-              SimpleDialogOption(
-                child: Text("OUI", style: TextStyle(color: Colors.blue),),
-                onPressed: () {},
-              )
-            ],
-          );
-        }
-        );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _item.add(BottomNavigationBarItem(icon: Icon(Icons.home, color: Colors.grey), label: "Home"));
-    _item.add(BottomNavigationBarItem(icon: Icon(Icons.favorite, color: Colors.grey), label: "Home"));
-    _item.add(BottomNavigationBarItem(icon: Icon(Icons.search, color: Colors.grey), label: "Home"));
-    _item.add(BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle, color: Colors.grey), label: "Home"));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(value),
-          actions: const [
-            Icon(Icons.notification_add_sharp, size: 30),
-            Icon(Icons.download, size: 30)
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: Text("Create a task"),
-        ),
-        // persistentFooterButtons: const [
-        //   Icon(Icons.home, size: 25),
-        //   Icon(Icons.favorite, size: 25),
-        //   Icon(Icons.search, size: 25),
-        // ],
-        bottomNavigationBar: BottomNavigationBar(
-          items: _item
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ElevatedButton(
-                onPressed: onClick,
-                child: const Text("first button")
+      backgroundColor: Colors.white,
+      body: Row(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width*0.3,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/sideImg.png"),
+                fit: BoxFit.cover
+              )
             ),
-            const Divider(height: 10),
-            ElevatedButton(
-                onPressed: onClickTwo,
-                child: const Text("second button")
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width*0.7,
+            padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text("06:22 AM", style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: "avenir",
+                      fontWeight: FontWeight.w500
+                    ),),
+                    Expanded(child: Container()),
+                    Container(
+                      height: 20,
+                        width: 20,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/cloud.png")
+                        )
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    Text("34 C", style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: "avenir",
+                      fontWeight: FontWeight.w600
+                    ),),
+
+                  ],
+                ),
+                Text("Aug 1, 2022 | Wednesday", style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey
+                ),),
+                Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 70,
+                              width: 70,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/logo.png"),
+                                fit: BoxFit.contain
+                              )
+                            ),
+                          ),
+                          Text("e-Wallet", style: TextStyle(
+                            fontSize: 50,
+                            fontFamily: "ubuntu",
+                            fontWeight: FontWeight.w600
+                          ),),
+                          SizedBox(height: 10,),
+                          Text("Open an account for Digital e-Wallet app", style: TextStyle(
+                            color: Colors.grey
+                          ),)
+                        ],
+                      ),
+                    )
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/home");
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Color(0xffffac30),
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Sign up", style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),),
+                          Icon(Icons.arrow_forward)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Center(
+                  child: Text("Create an account", style: TextStyle(
+                    fontSize: 16
+                  ),),
+                )
+
+
+              ],
             ),
-            ElevatedButton(
-                onPressed: showAlert,
-                child: const Text("Alert button")
-            ),
-            const Divider(height: 10),
-            TextButton(
-                onPressed: () {},
-                child: const Text("OK BUTTON")
-            ),
-            IconButton(
-                onPressed: (){},
-                tooltip: "an icon button",
-                icon: const Icon(Icons.thumb_up, color: Colors.blue,size: 20)
-            ),
-            const FormPage(),
-          ],
-        )
-    );
-  }
-}
-
-class FormPage extends StatefulWidget {
-  const FormPage({Key? key}) : super(key: key);
-
-  @override
-  _FormPageState createState() => _FormPageState();
-}
-
-class _FormPageState extends State<FormPage> {
-  bool isChecked = false;
-  int val = 0;
-  bool isLive= false;
-
-  void change (value) {
-    setState(() {
-      val = value;
-    });
-  }
-
-  void handleLive(value) {
-    setState(()  {
-      isLive = !isLive;
-    });
-  }
-
-  Widget CustomRadio() {
-    List <Widget> _buttonRadio = [];
-    for(int i=0; i<4; i++) {
-      _buttonRadio.add(
-        RadioListTile(value: i, groupValue: val, onChanged: change, activeColor: Colors.redAccent, title: Text("Choix $i"), )
-      );
-    }
-    return Column(
-      children: _buttonRadio,
-    );
-  }
-
-  Widget CustomCheckbox() {
-    return Column(
-      children: [
-        CheckboxListTile(
-          value: isLive,
-          onChanged: handleLive,
-          controlAffinity: ListTileControlAffinity.trailing,
-          title: const Text("Judo live"),
-          subtitle: const Text("Ippon, Waza-ari"),
-        )
-      ],
-    );
-  }
-
-  Widget CustomTextfiled() {
-    return const TextField(
-      decoration: InputDecoration(
-        labelText: "First Name",
-        hintText: "Your name please",
-        icon: Icon(Icons.supervised_user_circle),
+          )
+        ],
       ),
-      keyboardType: TextInputType.text,
-    );
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-       CustomTextfiled() ,CustomRadio(), CustomCheckbox()
-      ],
     );
   }
 }
-
-
 
 
