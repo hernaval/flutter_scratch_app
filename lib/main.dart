@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scratch_app/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,21 +15,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green
       ),
-      home: const HomePage(),
+      home: const WelcomePage(),
       routes: {
         '/home': (context) => HomePage()
       },
     );
   }
 }
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +140,6 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16
                   ),),
                 )
-
 
               ],
             ),
