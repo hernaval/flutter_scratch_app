@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scratch_app/home_page.dart';
+import 'package:scratch_app/home_with_sidebar.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const WelcomePage(),
       routes: {
-        '/home': (context) => HomePage()
+        '/home': (context) => HomeWithSidebar()
       },
     );
   }
