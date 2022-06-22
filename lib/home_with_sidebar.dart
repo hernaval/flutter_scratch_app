@@ -21,7 +21,7 @@ class HomeWithSidebarWidget extends StatefulWidget {
 }
 
 class _HomeWithSidebarWidgetState extends State<HomeWithSidebarWidget> with  TickerProviderStateMixin {
-  bool sidebarActive= true;
+  bool sidebarActive= false;
   late AnimationController rotationController;
 
   @override
@@ -89,18 +89,21 @@ class _HomeWithSidebarWidgetState extends State<HomeWithSidebarWidget> with  Tic
               )
             ],
           ),
-          Expanded(child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              navigatorTile("Home", true),
-              navigatorTile("Profile", false),
-              navigatorTile("Account", false),
-              navigatorTile("Home", false),
-              navigatorTile("Transactions", false),
-              navigatorTile("Stats", false),
-            ],
-          )
-          ),
+          Flex(direction: Axis.vertical, children: [
+            Expanded(child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                navigatorTile("Home", true),
+                navigatorTile("Profile", false),
+                navigatorTile("Account", false),
+                navigatorTile("Home", false),
+                navigatorTile("Transactions", false),
+                navigatorTile("Stats", false),
+              ],
+            )
+            ),
+          ],),
+
 
           Container(
             alignment: Alignment.bottomLeft,
