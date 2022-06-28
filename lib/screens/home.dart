@@ -17,6 +17,7 @@ class Home extends StatelessWidget {
           highlightColor: Colors.transparent
         ),
         child: BottomNavigationBar(
+          elevation: 0,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           selectedItemColor: Theme.of(context).primaryColor,
