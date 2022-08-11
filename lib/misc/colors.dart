@@ -1,11 +1,14 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
-class AppColors{
-  static final Color textColor1= Color(0xFF989acd);
-  static final Color textColor2 = Color(0xFF878593);
-  static final Color bigTextColor=Color(0xFF2e2e31);
-  static final Color mainColor= Color(0xFF5d69b3);
-  static final Color starColor = Color(0xFFe7bb4e);
-  static final Color mainTextColor = Color(0xFFababad);
-  static final Color buttonBackground = Color(0xFFf1f1f9);
-}
+
+const Color white = Color(0xFFFFFFFF);
+const Color black = Color(0xFF000000);
+
+const Color primary = Color(0xFF92A3FD);
+const Color secondary = Color(0xFF9DCEFF);
+const Color thirdColor = Color(0xFFC58BF2);
+const Color fourthColor = Color(0xFFEEA4CE);
+const Color bgTextField = Color(0xFFF7F8F8);
+
+const Color facebookColor = Color(0xFF3b5998);
+const Color googleColor = Color(0xFFDB4437);

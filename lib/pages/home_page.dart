@@ -1,177 +1,189 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:scratch_app/misc/colors.dart';
-import 'package:scratch_app/widgets/app_large_text.dart';
-import 'package:scratch_app/widgets/app_text.dart';
+import 'package:scratch_app/widgets/chart_activity_status.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin  {
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 30, left: 20),
-              child: Row(
+      body: getBody(),
+    );
+  }
+  
+  Widget getBody() {
+    var size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.menu, size: 30, color: Colors.black,)),
-                  Expanded(child: Container()),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Welcome", style: TextStyle(
+                        fontSize: 14,
+                        color: black
+                      ),),
+                      SizedBox(height: 5,),
+                      Text("Sophemen", style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: black
+                      ),),
+                    ],
+                  ),
                   Container(
-                    margin: EdgeInsets.only(right: 20),
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(0.5)
+                      color: black.withOpacity(0.03),
+                      borderRadius: BorderRadius.circular(12)
+
                     ),
-                  ),
+                    child: Center(
+                      child: Icon(LineIcons.bell),
+                    ),
+                  )
                 ],
               ),
-            ),
-            SizedBox(height: 30),
-            Container(
-                margin: EdgeInsets.only(left: 20),
-                child: AppLargeText(text: "Discover")
-            ),
-            SizedBox(height: 20),
-            //tabbar
-            Container(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TabBar(
-                  labelPadding: EdgeInsets.only(left: 20, right: 20),
-                  controller: _tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: true,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: CircleTabIndicator(color: AppColors.mainColor, radius: 3),
-                  tabs: [
-                    Tab(text: "Places"),
-                    Tab(text: "Inspiration"),
-                    Tab(text: "Emotions")
-                  ],
+              SizedBox(height: 30),
+              Container(
+                width: double.infinity,
+                height: 145,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: LinearGradient(
+                        colors: [secondary, primary]
+                    )
                 ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              padding: EdgeInsets.only(left: 20),
-              width: double.maxFinite,
-              height: 300,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  ListView.builder(
-                    itemCount: 3,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 20),
-                      width: 200,
-                      height: 300,
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                      image: AssetImage("images/mountain.jpeg"),
-                      fit: BoxFit.cover
-                      )
-                      ),
-                      );
-                    },
-                  ),
-                  Tab(text: "fff"),
-                  Tab(text: "fff")
-                ],
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                children: [
-                  AppLargeText(text: "Explore more", size: 20,),
-                  Expanded(child: Container()),
-                  AppText(text: "See all", color: AppColors.textColor1,)
-                ],
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              height: 70,
-              width: double.maxFinite,
-              margin: EdgeInsets.only(left: 20),
-              child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                  itemBuilder: (_, index) {
-                return Container(
-                  margin: EdgeInsets.only(right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Row(
                     children: [
-                  Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                      image: AssetImage("images/mountain.jpeg"),
-                      fit:  BoxFit.cover
-                      )
+                      Flexible(
+                          child: Container(
+                            width: (size.width),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("BMI  (Body Mass Index", style: TextStyle(fontSize: 14,
+                                fontWeight: FontWeight.bold, color: white),),
+                                Text("BMI  (Body Mass Index", style: TextStyle(fontSize: 13,
+                                    fontWeight: FontWeight.w400, color: white),),
+                                Container(
+                                  width: 95,
+                                    height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                      gradient: LinearGradient(
+                                          colors: [fourthColor, thirdColor]
+                                      )
+                                  ),
+                                  child: Center(
+                                    child: Text("View more", style: TextStyle(fontSize: 13, color: white))
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                       ),
-                      ),
+                      SizedBox(width: 20,),
                       Container(
-                        child: AppText(text: "Kayaking", color: AppColors.textColor2,size: 12,),
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                                colors: [fourthColor, thirdColor]
+                            )
+                        ),
+                        child: Center(
+                          child: Text("20,3", style: TextStyle(fontSize: 13, color: white),),
+                        ),
                       )
                     ],
                   ),
-                );
-              }),
-            )
-          ],
+                ), //
+              ),
+              SizedBox(height: 30),
+              Container(
+                width: double.infinity,
+                height: 60,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: secondary.withOpacity(0.5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Today target", style: TextStyle(fontSize: 17, color: black, fontWeight: FontWeight.w600),),
+                      Container(
+                        width: 70,
+                        height: 35,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(
+                                colors: [secondary, primary]
+                            )
+                        ),
+                        child: Center(
+                            child: Text("Check", style: TextStyle(fontSize: 13, color: white))
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              Text("Activity Status", style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: black
+              ),),
+              SizedBox(height: 15),
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: secondary.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(30)
+                ),
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: LineChart(activityData()),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text("Heart Rate", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+            ],
+          ),
         ),
+      ),
     );
   }
 }
-
-class CircleTabIndicator extends Decoration {
-  final Color color;
-  double radius;
-  CircleTabIndicator({required this.color, required this.radius});
-  @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return  _CirclePainter(color:color, radius: radius);
-  }
-}
-
-
-class _CirclePainter extends BoxPainter {
-  final Color color;
-  double radius;
-
-  _CirclePainter({required this.color, required this.radius});
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias= true;
-    final Offset circleOffset = Offset(configuration.size!.width/2 -radius/2, configuration.size!.height);
-
-    canvas.drawCircle(offset+circleOffset, radius, _paint);
-  }
-  
-}
-  
